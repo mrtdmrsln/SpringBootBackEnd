@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Invoices</title>
+    <bookmarks>
+        <bookmark name="Invoices" href="#invoices"></bookmark>
+    </bookmarks>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+
+
+<span class="titles-style" th:text="|Invoice|"></span>
+<!-- Invoice Table -->
+<div id="invoice">
+    <!-- <span class="date">"{invoice?.getInvoiceId()}"</span> -->
+    <div>
+        <table class="invoices_table paginate-table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>E-mail</th>
+                <th>Phone</th>
+                <th>Total Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${invoice?.getInvoiceId()}"></td>
+                <td th:text="${invoice?.getUser().getName()}"></td>
+                <td th:text="${invoice?.getAddress()}"></td>
+                <td th:text="${invoice?.getEmail()}"></td>
+                <td th:text="${invoice?.getPhoneNumber()}"></td>
+                <td th:text="${invoice?.getTotalPrice()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <span class="titles-style" th:text="|Items / Count: ${#lists.size(invoice.getItems())}|"></span>
+        <table class="invoices_table paginate-table">
+            <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${invoice?.getItems()}">
+                <td th:text="${item?.getProdName()}"></td>
+                <td th:text="${item?.getQuantity()}"></td>
+                <td th:text="${item?.getPrice()}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
